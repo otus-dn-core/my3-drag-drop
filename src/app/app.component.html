@@ -1,6 +1,43 @@
 <h2>Angular Drag and Drop</h2>
 
 <div class="container">
+  <div class="row" style="margin-top: 5%;">
+    <div class="text-center col-md-12">
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
+  </div>
+  <div class="row" style="margin-top: 5%;">
+    <div class="text-center col-md-8">
+      <h5>Crop Image</h5>
+      <image-cropper
+        *ngIf="imgChangeEvt"
+        [imageBase64]="imgChangeEvt"
+        [imageChangedEvent]="imgChangeEvt"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="2 / 1"
+        [resizeToWidth]="1200"
+        format="jpeg"
+        (imageCropped)="cropImg($event)"
+        (imageLoaded)="imgLoad()"
+        (cropperReady)="initCropper()"
+        (loadImageFailed)="imgFailed()">
+      </image-cropper>
+    </div>
+
+    <div class="col-md-4">
+      <h6>Image Preview</h6>
+      <img style="width: 50vh" [src]="cropImgPreview" />
+    </div>
+
+  </div>
+</div>
+
+
+<hr>
+<hr>
+<hr>
+
+<div class="container">
 
   <form [formGroup]="myForm" (ngSubmit)="submit()">
 
@@ -28,26 +65,11 @@
       </div>
     </div>
 
-<!--    <div class="preview-wrapper">-->
-<!--      <div class="img-preview" *ngFor='let url of images'>-->
-<!--        <img [src]="url" width="200px">-->
-<!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>-->
-<!--      </div>-->
-<!--    </div>-->
+
 
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 
 </div>
-
-<hr>
-<hr>
-<hr>
-
-<!--<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">-->
-<!--  <div class="example-box" *ngFor="let movieName of Movies" cdkDrag>{{movieName.name}}-->
-<!--  <img style="width: 100px" src="https://ds04.infourok.ru/uploads/ex/056f/000caf9e-2025c34c/img16.jpg" on-click="showObject(movieName)">-->
-<!--  </div>-->
-<!--</div>-->
 
 <router-outlet></router-outlet>
