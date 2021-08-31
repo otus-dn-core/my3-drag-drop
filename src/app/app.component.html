@@ -59,11 +59,19 @@
     </div>
 
     <div cdkDropList class="preview-wrapper" (cdkDropListDropped)="drop($event)">
-      <div class="img-preview" *ngFor='let url of images' cdkDrag>
-        <img [src]="url" width="200px" on-click="showUrl(url)">
-        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>
+      <div class="img-preview" *ngFor='let obj of images' cdkDrag>
+        <img [src]="obj.cropImg || obj.url" width="200px" on-click="showUrl(obj.url)">
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(obj.url)">Remove</button>
+<!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(obj)">Remove</button>-->
       </div>
     </div>
+
+<!--    <div cdkDropList class="preview-wrapper" (cdkDropListDropped)="drop($event)">-->
+<!--      <div class="img-preview" *ngFor='let url of images' cdkDrag>-->
+<!--        <img [src]="url" width="200px" on-click="showUrl(url)">-->
+<!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>-->
+<!--      </div>-->
+<!--    </div>-->
 
 
 
