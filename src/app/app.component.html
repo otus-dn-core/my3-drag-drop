@@ -1,9 +1,53 @@
 <h2>Angular Drag and Drop</h2>
 
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movieName of Movies" cdkDrag>{{movieName.name}}
-  <img style="width: 100px" src="https://ds04.infourok.ru/uploads/ex/056f/000caf9e-2025c34c/img16.jpg" on-click="showObject(movieName)">
-  </div>
+<div class="container">
+
+  <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input formControlName="name" id="name" type="text" class="form-control">
+      <div *ngIf="formValue.name.touched && formValue.name.invalid" class="alert alert-danger">
+        <div *ngIf="formValue.name.errors && formValue.name.errors.required">Name is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="file">File</label>
+      <input formControlName="file" id="file" type="file" class="form-control-file" multiple=""
+             (change)="onFileChange($event)">
+      <div *ngIf="formValue.file.touched && formValue.file.invalid" class="alert alert-danger">
+        <div *ngIf="formValue.file.errors && formValue.file.errors.required">File is required.</div>
+      </div>
+    </div>
+
+    <div cdkDropList class="preview-wrapper" (cdkDropListDropped)="drop($event)">
+      <div class="img-preview" *ngFor='let url of images' cdkDrag>
+        <img [src]="url" width="200px" on-click="showUrl(url)">
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>
+      </div>
+    </div>
+
+<!--    <div class="preview-wrapper">-->
+<!--      <div class="img-preview" *ngFor='let url of images'>-->
+<!--        <img [src]="url" width="200px">-->
+<!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+
 </div>
+
+<hr>
+<hr>
+<hr>
+
+<!--<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">-->
+<!--  <div class="example-box" *ngFor="let movieName of Movies" cdkDrag>{{movieName.name}}-->
+<!--  <img style="width: 100px" src="https://ds04.infourok.ru/uploads/ex/056f/000caf9e-2025c34c/img16.jpg" on-click="showObject(movieName)">-->
+<!--  </div>-->
+<!--</div>-->
 
 <router-outlet></router-outlet>
