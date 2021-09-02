@@ -1,9 +1,9 @@
-<h2>Angular Drag and Drop</h2>
+<h2>Обработка фотографий</h2>
 
-<div class="container">
+<div class="container" *ngIf="imgChangeEvt">
   <div class="row" style="margin-top: 5%;">
     <div class="text-center col-md-12">
-      <input type="file" (change)="onFileSelected($event)" />
+<!--      <input type="file" (change)="onFileSelected($event)" />-->
     </div>
   </div>
   <div class="row" style="margin-top: 5%;">
@@ -33,21 +33,13 @@
 </div>
 
 
-<hr>
-<hr>
-<hr>
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
 
 <div class="container">
 
   <form [formGroup]="myForm" (ngSubmit)="submit()">
-
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input formControlName="name" id="name" type="text" class="form-control">
-      <div *ngIf="formValue.name.touched && formValue.name.invalid" class="alert alert-danger">
-        <div *ngIf="formValue.name.errors && formValue.name.errors.required">Name is required.</div>
-      </div>
-    </div>
 
     <div class="form-group">
       <label for="file">File</label>
@@ -65,15 +57,6 @@
 <!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(obj)">Remove</button>-->
       </div>
     </div>
-
-<!--    <div cdkDropList class="preview-wrapper" (cdkDropListDropped)="drop($event)">-->
-<!--      <div class="img-preview" *ngFor='let url of images' cdkDrag>-->
-<!--        <img [src]="url" width="200px" on-click="showUrl(url)">-->
-<!--        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(url)">Remove</button>-->
-<!--      </div>-->
-<!--    </div>-->
-
-
 
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
